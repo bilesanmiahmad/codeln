@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-k1r-qeht3zwjtcdh_6@j%9p=pm2*nbi3#1j7-!ymahz8bbwg6g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://dabatech-chat.herokuapp.com',
+                 'localhost', '127.0.0.1']
 
 
 # Application definition
