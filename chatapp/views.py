@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from cent import Client
 # Django Build in User Model
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse
@@ -35,6 +34,11 @@ class UserViewSet(ModelViewSet):
             token_dict.update(serializer.data)
             return Response(token_dict, status=201)
         return Response(serializer.errors, status=400)
+
+    def login(self, request):
+        if request.user.is_aunthenticated:
+            redirect('chats')
+            pass
 
     @action(detail=False, methods=['post'], url_path='join-channel')
     def join_channel(self, request):
@@ -101,22 +105,3 @@ class ChannelViewSet(ModelViewSet):
 class ChannelMessageViewSet(ModelViewSet):
     queryset = ChannelMessage.objects.all()
     serializer_class = ChannelMessageSerializer
-
-# @csrf_exempt
-# def message_list(request, sender=None, receiver=None):
-#     """
-#     List all required messages, or create a new message.
-#     """
-#     if request.method == 'GET':
-#         messages = Message.objects.filter(
-#             sender_id=sender, receiver_id=receiver)
-#         serializer = MessageSerializer(
-#             messages, many=True, context={'request': request})
-#         return JsonResponse(serializer.data, safe=False)
-#     elif request.method == 'POST':
-#         data = JSONParser().parse(request)
-#         serializer = MessageSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return JsonResponse(serializer.data, status=201)
-#         return JsonResponse(serializer.errors, status=400)
