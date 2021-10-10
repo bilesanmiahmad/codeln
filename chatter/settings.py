@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k1r-qeht3zwjtcdh_6@j%9p=pm2*nbi3#1j7-!ymahz8bbwg6g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://dabatech-chat.herokuapp.com',
                  'localhost', '127.0.0.1']
@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_PASSWORD'),  # db,
+        'HOST': 'db',
         'PORT': 5432
     }
 }
